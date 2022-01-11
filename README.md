@@ -67,25 +67,14 @@ height = '120px'/>
 
 首先给出流程图：
 
-```mermaid
-	graph TD
-	O(start) --> A[创建一个内含所有点的虚拟超大三角形]
-	A --> B[逐个取出待定点]
-	B --> C[逐个取出现有三角形]
-	C --> D{点在三角形外接圆内或圆上?}
-	D --> |yes| E[删除该三角形并拆出其3条边入边表]
-	D --> |no| F[放过该三角形]
-	E --> G{三角形全被访问?}
-	F --> G
-	G --> |no| C
-	G --> |yes| I[连根拔除边表中的重复边]
-	I --> J[每一条边和待定点新建三角形]
-	J --> K[清空边表]
-	K --> L{所有点被访问?}
-	L --> |yes| M[删除包含了超大三角形顶点的三角形]
-	L --> |no| B
-	M --> N(end)
-```
+<center>
+<img
+src = https://s4.ax1x.com/2022/01/11/7mwjBD.png
+width = '750px'
+height = '1300px'
+/>
+</center>
+
 
 接下来我们一起来详细看一下关键步骤。首先需要注意的是，这里进行三角剖分只需要点的 x、y 坐标，不需要 z 坐标，也即依据点数据的 XOY 平面投影点进行三角剖分，在最后绘制时才考虑高程值。因此三角剖分主要在 XOY 平面上进行。
 
@@ -263,16 +252,15 @@ height = '220px'
 
 可视化框架如下：
 
-```mermaid
-	graph TD
-	A[MainWindow] --> B[打开文件子窗口]
-	A --> C[TVTKWindow]
-	C --> D[三角网及等高线显示窗口]
-	C --> E[等高线级数设置对话框]
-	D --> F[Viewer]
-	F --> G[三角网实体]
-	F --> H[等高线实体]
-```
+<center>
+<img
+src = https://s4.ax1x.com/2022/01/11/7mdcLD.png
+width = '460px'
+height = '400px'
+/>
+</center>
+
+
 
 ## 五. <span id = "4">借助Qtimer的等高线追踪效果动态延时展示</span>  <font size = 1>[返回目录](#content)</font>
 
@@ -308,12 +296,8 @@ height = '700px'
 <center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7mamNR.gif
-/>
-</center>
-
-<center>
-<img
-src = https://s4.ax1x.com/2022/01/11/7mad8P.png
+width = '500px'
+height = '400px'
 />
 </center>
 
@@ -324,4 +308,3 @@ src = https://s4.ax1x.com/2022/01/11/7mad8P.png
 [^1]: [三角剖分算法(delaunay)](https://www.cnblogs.com/zhiyishou/p/4430017.html)——纸异兽
 [^2]:[Delaunay三角剖分算法](https://baike.baidu.com/item/Delaunay%E4%B8%89%E8%A7%92%E5%89%96%E5%88%86%E7%AE%97%E6%B3%95/3779918?fr=aladdin)——百度百科
 [^3]:[QTimer](https://baike.baidu.com/item/QTimer/3131650?fr=aladdin)——百度百科
-
