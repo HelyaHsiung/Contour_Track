@@ -101,7 +101,7 @@ height = '200px'
 <img
 src = https://s4.ax1x.com/2022/02/28/bKJHxI.png
 width = '500px'
-height = '80px'
+height = '75px'
 />
 </div>
 
@@ -111,11 +111,11 @@ height = '80px'
 <img
 src = https://s4.ax1x.com/2022/02/28/bKJqMt.png
 width = '500px'
-height = '80px'
+height = '75px'
 />
 </div>
 
-上式中 <img src = https://s4.ax1x.com/2022/02/28/bKJLsP.png width = '30px' height = '30px'/> 和 <img src = https://s4.ax1x.com/2022/02/28/bKJ4aD.png width = '30px' height = '30px'/> 为待求参数。利用克莱默法则可以计算出圆心的 x 和 y 坐标。记 <img src = https://s4.ax1x.com/2022/02/28/bKJhVO.png width = '180px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJRr6.png width = '180px' height = '30px'/>；<img src = https://s4.ax1x.com/2022/02/28/bKJWqK.png width = '250px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJ2Kx.png width = '180px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJ5Ie.png width = '180px' height = '30px'/>, <img src = https://s4.ax1x.com/2022/02/28/bKJoPH.png width = '250px' height = '30px'/>. 上式即：
+上式中 <img src = https://s4.ax1x.com/2022/02/28/bKJLsP.png width = '30px' height = '30px'/> 和 <img src = https://s4.ax1x.com/2022/02/28/bKJ4aD.png width = '30px' height = '30px'/> 为待求参数。利用克莱默法则可以计算出圆心的 x 和 y 坐标。记 <img src = https://s4.ax1x.com/2022/02/28/bKJhVO.png width = '180px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJRr6.png width = '180px' height = '30px'/>；<img src = https://s4.ax1x.com/2022/02/28/bKJWqK.png width = '240px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJ2Kx.png width = '180px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJ5Ie.png width = '180px' height = '30px'/>, <img src = https://s4.ax1x.com/2022/02/28/bKJoPH.png width = '240px' height = '30px'/>. 上式即：
 
 <div align = center>
 <img
