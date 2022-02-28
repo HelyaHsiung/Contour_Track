@@ -67,22 +67,20 @@ height = '120px'/>
 
 首先给出流程图：
 
-<center>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7mwjBD.png
-width = '750px'
-height = '1300px'
+width = '650px'
+height = '1150px'
 />
-</center>
-
+</div>
 
 接下来我们一起来详细看一下关键步骤。首先需要注意的是，这里进行三角剖分只需要点的 x、y 坐标，不需要 z 坐标，也即依据点数据的 XOY 平面投影点进行三角剖分，在最后绘制时才考虑高程值。因此三角剖分主要在 XOY 平面上进行。
 
 (1) 创建虚拟的超大三角形
 这一步生成一个 XOY 平面上的大三角形，使其包围所有点在 XOY 平面的投影，并且没有点位于三角形的边上。我是首先求出所有点的 Xmin、Xmax、Ymin、Ymax，即横纵坐标的范围，这样可以得到一个矩形包围圈。然后求出这个矩形的外接等边三角形。我这里还将矩形中心缩放2倍以避免点刚好落在三角形边上的特殊情况。这个三角形的创建方式也各式各样，只要可以达到目的就可以了。
 
-<center>
-<figure>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/10/7E0Ptx.png
 width = '350px'
@@ -93,45 +91,49 @@ src = https://s4.ax1x.com/2022/01/10/7EgQlq.png
 width = '280px'
 height = '200px'
 />
-</figure>
-</center>
+</div>
+
 (2) 判断点是否位于三角形外接圆内部
 这里我们设三角形 ABC 和点 P，首先求出三角形外接圆的圆心 O，然后得到半径 r，再比较 r 与 OP 大小关系。
 求解圆心的时候利用三角形外接圆的圆心到达三个顶点距离相等这一特性：
-$$
-\begin{cases}
-(x_A - x_O)^2 + (y_A - y_O)^2 = (x_B - x_O)^2 + (y_B - y_O)^2\\
-(x_C - x_O)^2 + (y_C - y_O)^2 = (x_B - x_O)^2 + (y_B - y_O)^2\\
-\end{cases}
-$$
+
+<div align = center>
+<img
+src = https://s4.ax1x.com/2022/02/28/bKJHxI.png
+width = '500px'
+height = '80px'
+/>
+</div>
 
 对其进行整理可以得到：
 
-$$
-\begin{cases}
-2(x_A - x_B)\mathbf{x_O} + 2(y_A - y_B)\mathbf{y_O} = x_A^2 - x_B^2 + y_A^2 - y_B^2\\
-2(x_C - x_B)\mathbf{x_O} + 2(y_C - y_B)\mathbf{y_O} = x_C^2 - x_B^2 + y_C^2 - y_B^2\\
-\end{cases}
-$$
+<div align = center>
+<img
+src = https://s4.ax1x.com/2022/02/28/bKJqMt.png
+width = '500px'
+height = '80px'
+/>
+</div>
 
-上式中 $\mathbf{x_O}$ 和 $\mathbf{y_O}$ 为待求参数。利用克莱默法则可以计算出圆心的 x 和 y 坐标。记 $a1 = 2(x_A - x_B)$，$b1 = 2(y_A - y_B)$，$c1 = x_A^2 - x_B^2 + y_A^2 - y_B^2$；$a2 = 2(x_C - x_B)$，$b2 = 2(y_C - y_B)$，$c2 = x_C^2 - x_B^2 + y_C^2 - y_B^2$. 上式即：
+上式中 <img src = https://s4.ax1x.com/2022/02/28/bKJLsP.png width = '30px' height = '30px'/> 和 <img src = https://s4.ax1x.com/2022/02/28/bKJ4aD.png width = '30px' height = '30px'/> 为待求参数。利用克莱默法则可以计算出圆心的 x 和 y 坐标。记 <img src = https://s4.ax1x.com/2022/02/28/bKJhVO.png width = '180px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJRr6.png width = '180px' height = '30px'/>；<img src = https://s4.ax1x.com/2022/02/28/bKJWqK.png width = '250px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJ2Kx.png width = '180px' height = '30px'/>，<img src = https://s4.ax1x.com/2022/02/28/bKJ5Ie.png width = '180px' height = '30px'/>, <img src = https://s4.ax1x.com/2022/02/28/bKJoPH.png width = '250px' height = '30px'/>. 上式即：
 
-$$
-\begin{cases}
-a1\cdot\mathbf{x_O} + b1\cdot\mathbf{y_O} = c1\\
-a2\cdot\mathbf{x_O} + b2\cdot\mathbf{y_O} = c2\\
-\end{cases}
-$$
+<div align = center>
+<img
+src = https://s4.ax1x.com/2022/02/28/bKJTGd.png
+width = '250px'
+height = '75px'
+/>
+</div>
 
 根据克莱默法则，
 
-$$
-\mathbf{x_O} = \frac{\left|\begin{array}{cc}c1 & b1\\c2 & b2\end{array}\right|}{\left|\begin{array}{cc}a1 & b1\\a2 & b2\end{array}\right|}
-$$
-
-$$
-\mathbf{y_O} = \frac{\left|\begin{array}{cc}a1 & c1\\a2 & c2\end{array}\right|}{\left|\begin{array}{cc}a1 & b1\\a2 & b2\end{array}\right|}
-$$
+<div align = center>
+<img
+src = https://s4.ax1x.com/2022/02/28/bKJ7RA.png
+width = '350px'
+height = '280px'
+/>
+</div>
 
 知道圆心之后就可以确定点到圆心的距离，并与圆的半径做比较，若点到圆心距离大于圆的半径则说明点在三角形外接圆外部。反之则点在圆的内部或者圆上。
 
@@ -143,13 +145,13 @@ $$
 
 (2) 我们看下面这个图片，如果一个点在三角形的右侧，因为点是按照从 x 坐标从小到大的顺序来插入的，所以后插入的点一定也在这个三角形的右侧。既然点在圆的右侧就不存在落在三角形外接圆内部的这种情况。那么我们就可以认定这个三角形已经是一个“成熟”的三角形了，以后就不用再把它拿出来做判断。具体操作是我们在向三角形列表 triangle_list 中加入三角形之前，设置一个缓冲区 triangle_buffer。这个缓冲区内的三角形有待继续检验，当某一个点在某一个三角形外接圆的右侧时，这一个三角形就可以从缓冲区中取出来放进最终结果的三角形列表当中，它就不用再接受检验了。
 
-<center>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7eJhNV.png
 width = '240px'
 height = '150px'
 />
-</center>
+</div>
 
 
 4. 记录点与三角形的关联关系
@@ -178,7 +180,7 @@ height = '150px'
 
 等高线线段的两个端点均根据等高线高程值和三角形边的两个端点的高程值进行线性插值得到。
 
-<center>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7egcJe.png
 width = '270px'
@@ -189,7 +191,7 @@ src = https://s4.ax1x.com/2022/01/11/7eg6iD.png
 width = '250px'
 height = '250px'
 />
-</center>
+</div>
 
 
 (2) 另一种就是等高线追踪算法，其特点在于“追踪”，即完整地创建一条等高线之后创建下一条等高线。这一次选用的是三角网格下的等高线追踪，其等高线线段位置的情况比矩形单元格下更容易判断。
@@ -198,25 +200,25 @@ height = '250px'
 
 当我们在这个三角网格中的等高线线段创建出来之后，可以发现这个线段和三角形相交于边 AB 和边 AC，那么下一次就可以访问这个三角形的以 AB 为公共边的相邻三角形，或者访问以 AC 为公共边的相邻三角形。为了防止重复访问，设置一个 flag 矩阵或者列表来使用标号法，我这里 flag = 1 代表可以访问，flag = 0 代表不可以访问。flag矩阵初始化为 1，访问过了就这个三角形的 flag 更改为 0 以避免下一次访问。为了减少运算次数，在等高线正式追踪之前，遍历一次 triangle_list，如果其 3 个顶点均大于 z 或者均小于等于 z ，那么就将其 flag 从 1 改为 0 表示无需访问。
 
-<center> 
+<div align = center> 
 <img
 src = https://s4.ax1x.com/2022/01/11/7efc7t.png
 width = '230px'
 height = '200px'
 />
-</center>
+</div>
 
 ①  借助三个“游标”实现等高线追踪
 
 首先我们先认识一下这三个游标：triangle_base, triangle_cur, triangle_leaf。第一，我们只需要知道它是三角形的索引。第二，我们了解一下这三个“游标”的意义： triangle_base 代表某一条等高线被访问的第一个线段所在的三角网格的索引；triangle_cur 代表当前访问的三角网格的索引；triangle_leaf 表示当我们访问到一条的等高线的腰部时，先任意沿着其中一个方向进行等高线追踪，另外一个方向用 triangle_leaf 记录下来。
 
-<center>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7eHNWt.png
 width = '500px'
 height = '230px'
 />
-</center>
+</div>
 
 
 第一步：从 triangle_list 第一个三角形开始判断，直到找到第一个可以访问的三角网格，这代表着我们已经找到了一条等高线，这条等高线第一个被访问的线段所在的三角形用 triangle_base 记录下来，然后把这个等高线线段绘制出来；
@@ -233,13 +235,13 @@ height = '230px'
 
 在创建等高线线段的时候，我们已经可以知道等高线线段和三角网格相交于哪两条边。两个三角形有一条公共边，根据这一条公共边的两个端点即可以找到共边相邻三角形。
 
-<center>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7eHtJI.png
 width = '260px'
 height = '220px'
 />
-</center>
+</div>
 观察上图，右侧的绿色三角形为当前访问的三角形，红点表示公共边的两个端点，左上侧的红点有 4 个关联三角形，右下侧的红点有 5 个关联三角形，由于点的关联三角形存储的只是三角形的索引，因此对这长度为 4 的列表和长度为 5 的列表进行相交，并且将自身的索引排除，那么求得的结果的长度为 1 或者 0 。长度为 1 代表其相邻三角形的索引，长度为 0 代表当前访问的三角形在这条公共边上没有相邻三角形或者相邻三角形已经被访问过。
 
 有了这个基础，我们就可以步步推进，沿着等高线方向进行追踪。
@@ -252,13 +254,13 @@ height = '220px'
 
 可视化框架如下：
 
-<center>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7mdcLD.png
 width = '460px'
 height = '400px'
 />
-</center>
+</div>
 
 
 
@@ -281,25 +283,25 @@ self.timer.timeout.connect(self.find_next_lineSlot)  # self.find_next_lineSlot �
 
 最后，附上这个项目的流程图：
 
-<center>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7mYLX4.png
 width = '500px'
 height = '700px'
 />
-</center>
+</div>
 
 
 ## 六. <span id = "5">源文件及参考文献</span>  <font size = 1>[返回目录](#content)</font>
 
 最终演示效果：
-<center>
+<div align = center>
 <img
 src = https://s4.ax1x.com/2022/01/11/7mamNR.gif
 width = '500px'
 height = '400px'
 />
-</center>
+</div>
 
 项目源代码及whl文件：[Contour_Track](https://github.com/HelyaHsiung/Contour_Track.git)
 
